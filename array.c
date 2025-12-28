@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_DEPRECATE
+п»ї#define _CRT_SECURE_NO_DEPRECATE
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,42 +9,42 @@
 #define m 10
 
 int print_menu(void) {
-    printf("\n=== МЕНЮ ФУТБОЛЬНЫХ ИГРОКОВ ===\n");
-    printf("1 - Инициализация массива\n");
-    printf("2 - Загрузка из файла (players_out.txt)\n");
-    printf("3 - Вывод массива\n");
-    printf("4 - Изменение записи\n");
-    printf("5 - Поиск по фамилии\n");
-    printf("6 - Сортировка по количеству игр\n");
-    printf("7 - Сохранение в файл (players_out.txt)\n");
-    printf("8 - Молодые защитники в файл (young_defenders.txt)\n");
-    printf("0 - Выход\n");
+    printf("\n=== РњР•РќР® Р¤РЈРўР‘РћР›Р¬РќР«РҐ РР“Р РћРљРћР’ ===\n");
+    printf("1 - РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РјР°СЃСЃРёРІР°\n");
+    printf("2 - Р—Р°РіСЂСѓР·РєР° РёР· С„Р°Р№Р»Р° (players_out.txt)\n");
+    printf("3 - Р’С‹РІРѕРґ РјР°СЃСЃРёРІР°\n");
+    printf("4 - РР·РјРµРЅРµРЅРёРµ Р·Р°РїРёСЃРё\n");
+    printf("5 - РџРѕРёСЃРє РїРѕ С„Р°РјРёР»РёРё\n");
+    printf("6 - РЎРѕСЂС‚РёСЂРѕРІРєР° РїРѕ РєРѕР»РёС‡РµСЃС‚РІСѓ РёРіСЂ\n");
+    printf("7 - РЎРѕС…СЂР°РЅРµРЅРёРµ РІ С„Р°Р№Р» (players_out.txt)\n");
+    printf("8 - РњРѕР»РѕРґС‹Рµ Р·Р°С‰РёС‚РЅРёРєРё РІ С„Р°Р№Р» (young_defenders.txt)\n");
+    printf("0 - Р’С‹С…РѕРґ\n");
     return 0;
 }
 
-// Функция для записи молодых защитников в файл 
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ Р·Р°РїРёСЃРё РјРѕР»РѕРґС‹С… Р·Р°С‰РёС‚РЅРёРєРѕРІ РІ С„Р°Р№Р» 
 int writeYoungDefendersToFile(football_t * players, int size,
     int current_year, int current_month, int current_day, int* count) {
     FILE* file = fopen("young_defenders.txt", "w");
     if (file == NULL) {
-        printf("Ошибка создания файла\n");
+        printf("РћС€РёР±РєР° СЃРѕР·РґР°РЅРёСЏ С„Р°Р№Р»Р°\n");
         return -1;
     }
 
     *count = 0;
     for (int i = 0; i < size; i++) {
-        if (strcmp(players[i].role, "Защитник") == 0) {
+        if (strcmp(players[i].role, "Р—Р°С‰РёС‚РЅРёРє") == 0) {
             int player_age = age(players[i].birth_date.year, players[i].birth_date.month,
                 players[i].birth_date.day, current_year, current_month, current_day);
             if (player_age < 20 && players[i].game >= 40) {
-                // Запись в файл
-                fprintf(file, "Фамилия: %s\n", players[i].surname);
-                fprintf(file, "Дата рождения: %d.%d.%d\n",
+                // Р—Р°РїРёСЃСЊ РІ С„Р°Р№Р»
+                fprintf(file, "Р¤Р°РјРёР»РёСЏ: %s\n", players[i].surname);
+                fprintf(file, "Р”Р°С‚Р° СЂРѕР¶РґРµРЅРёСЏ: %d.%d.%d\n",
                     players[i].birth_date.day, players[i].birth_date.month, players[i].birth_date.year);
-                fprintf(file, "Клуб: %s\n", players[i].club);
-                fprintf(file, "Амплуа: %s\n", players[i].role);
-                fprintf(file, "Количество игр: %d\n", players[i].game);
-                fprintf(file, "Место рождения: %s\n", players[i].place);
+                fprintf(file, "РљР»СѓР±: %s\n", players[i].club);
+                fprintf(file, "РђРјРїР»СѓР°: %s\n", players[i].role);
+                fprintf(file, "РљРѕР»РёС‡РµСЃС‚РІРѕ РёРіСЂ: %d\n", players[i].game);
+                fprintf(file, "РњРµСЃС‚Рѕ СЂРѕР¶РґРµРЅРёСЏ: %s\n", players[i].place);
                 fprintf(file, "------------------------\n");
 
                 (*count)++;
@@ -53,7 +53,7 @@ int writeYoungDefendersToFile(football_t * players, int size,
     }
 
     fclose(file);
-    printf("Данные записаны в файл 'young_defenders.txt'\n");
+    printf("Р”Р°РЅРЅС‹Рµ Р·Р°РїРёСЃР°РЅС‹ РІ С„Р°Р№Р» 'young_defenders.txt'\n");
     return 0;
 }
 
@@ -68,11 +68,11 @@ int age(int year, int month, int day, int cur_year, int cur_month, int cur_day) 
 
 int fill_array(football_t* players, int size) {
     football_t defaultPlayers[SIZE] = {
-        {"Иванов", "Спартак", "Защитник", 45, "Москва", {15, 3, 2005}},
-        {"Петров", "Зенит", "Нападающий", 38, "СПб", {10, 7, 2004}},
-        {"Сидоров", "ЦСКА", "Защитник", 42, "Москва", {22, 11, 2006}},
-        {"Козлов", "Локомотив", "Вратарь", 30, "Ярославль", {5, 1, 2003}},
-        {"Морозов", "Динамо", "Вратарь", 25, "Москва", {18, 9, 2005}}
+        {"РРІР°РЅРѕРІ", "РЎРїР°СЂС‚Р°Рє", "Р—Р°С‰РёС‚РЅРёРє", 45, "РњРѕСЃРєРІР°", {15, 3, 2005}},
+        {"РџРµС‚СЂРѕРІ", "Р—РµРЅРёС‚", "РќР°РїР°РґР°СЋС‰РёР№", 38, "РЎРџР±", {10, 7, 2004}},
+        {"РЎРёРґРѕСЂРѕРІ", "Р¦РЎРљРђ", "Р—Р°С‰РёС‚РЅРёРє", 42, "РњРѕСЃРєРІР°", {22, 11, 2006}},
+        {"РљРѕР·Р»РѕРІ", "Р›РѕРєРѕРјРѕС‚РёРІ", "Р’СЂР°С‚Р°СЂСЊ", 30, "РЇСЂРѕСЃР»Р°РІР»СЊ", {5, 1, 2003}},
+        {"РњРѕСЂРѕР·РѕРІ", "Р”РёРЅР°РјРѕ", "Р’СЂР°С‚Р°СЂСЊ", 25, "РњРѕСЃРєРІР°", {18, 9, 2005}}
     };
 
     for (int i = 0; i < size; i++) {
@@ -83,7 +83,7 @@ int fill_array(football_t* players, int size) {
 
 int print_array(football_t* players, int size) {
     printf("\n+---+------------------+------------------+------------------+------------------+------------------+\n");
-    printf("|№    | Фамилия          | Клуб             | Амплуа           | Игр              | Дата рождения    |\n");
+    printf("|в„–    | Р¤Р°РјРёР»РёСЏ          | РљР»СѓР±             | РђРјРїР»СѓР°           | РРіСЂ              | Р”Р°С‚Р° СЂРѕР¶РґРµРЅРёСЏ    |\n");
     printf(" +----+------------------+------------------+------------------+------------------+------------------+\n");
 
     for (int i = 0; i < size; i++) {
@@ -109,16 +109,16 @@ int print_player(football_t player) {
 
 
 int change_record(football_t* players, int size) {
-    printf("Введите фамилию для поиска записи: ");
+    printf("Р’РІРµРґРёС‚Рµ С„Р°РјРёР»РёСЋ РґР»СЏ РїРѕРёСЃРєР° Р·Р°РїРёСЃРё: ");
     char surname[m];
     fgets(surname, sizeof(surname), stdin);
     surname[strcspn(surname, "\n")] = 0;
 
     football_t* found = search_surname(players, size, surname);
     if (found != NULL) {
-        printf("Найдена запись:\n");
+        printf("РќР°Р№РґРµРЅР° Р·Р°РїРёСЃСЊ:\n");
         print_player(*found);
-        printf("Изменить эту запись? (1 - yes): ");
+        printf("РР·РјРµРЅРёС‚СЊ СЌС‚Сѓ Р·Р°РїРёСЃСЊ? (1 - yes): ");
         int c;
         scanf(" %d", &c);
         getchar();
@@ -126,45 +126,45 @@ int change_record(football_t* players, int size) {
         switch (c) {
             case 1: {
                 edit_player(found);
-                printf("Запись обновлена!\n");
+                printf("Р—Р°РїРёСЃСЊ РѕР±РЅРѕРІР»РµРЅР°!\n");
                 break;
             }
         } 
     }
     else {
-        printf("Игрок с фамилией '%s' не найден\n", surname);
+        printf("РРіСЂРѕРє СЃ С„Р°РјРёР»РёРµР№ '%s' РЅРµ РЅР°Р№РґРµРЅ\n", surname);
         return -1;
     }
     return 0;
 }
 
 int edit_player(football_t* player) {
-    printf("\nВведите новые данные через пробел:\n");
+    printf("\nР’РІРµРґРёС‚Рµ РЅРѕРІС‹Рµ РґР°РЅРЅС‹Рµ С‡РµСЂРµР· РїСЂРѕР±РµР»:\n");
 
-    printf("Фамилия (%s): ", player->surname);
+    printf("Р¤Р°РјРёР»РёСЏ (%s): ", player->surname);
     char temp[m];
     fgets(temp, sizeof(temp), stdin);
     temp[strcspn(temp, "\n")] = 0;
     if (strlen(temp) > 0) strcpy(player->surname, temp);
 
-    printf("Клуб (%s): ", player->club);
+    printf("РљР»СѓР± (%s): ", player->club);
     fgets(temp, sizeof(temp), stdin);
     temp[strcspn(temp, "\n")] = 0;
     if (strlen(temp) > 0) strcpy(player->club, temp);
 
-    printf("Амплуа (%s): ", player->role);
+    printf("РђРјРїР»СѓР° (%s): ", player->role);
     fgets(temp, sizeof(temp), stdin);
     temp[strcspn(temp, "\n")] = 0;
     if (strlen(temp) > 0) strcpy(player->role, temp);
 
-    printf("Количество игр (%d): ", player->game);
+    printf("РљРѕР»РёС‡РµСЃС‚РІРѕ РёРіСЂ (%d): ", player->game);
     int games;
     if (scanf("%d", &games) == 1) {
         player->game = games;
     }
     getchar();
 
-    printf("Место (%s): ", player->place);
+    printf("РњРµСЃС‚Рѕ (%s): ", player->place);
     fgets(temp, sizeof(temp), stdin);
     temp[strcspn(temp, "\n")] = 0;
     if (strlen(temp) > 0) strcpy(player->place, temp);
@@ -188,7 +188,7 @@ int compare_games(const void* a, const void* b) {
 
 int sort_by_games(football_t* players, int size) {
     qsort(players, size, sizeof(football_t), compare_games);
-    printf("Массив отсортирован по количеству игр\n");
+    printf("РњР°СЃСЃРёРІ РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅ РїРѕ РєРѕР»РёС‡РµСЃС‚РІСѓ РёРіСЂ\n");
     print_array(players, size);
     return 0;
 }
@@ -196,7 +196,7 @@ int sort_by_games(football_t* players, int size) {
 int input_file(const char* filename, football_t* arr) {
     FILE* f = fopen(filename, "r");
     if (!f) {
-        printf("Файл %s не найден\n", filename);
+        printf("Р¤Р°Р№Р» %s РЅРµ РЅР°Р№РґРµРЅ\n", filename);
         return 0;
     }
 
@@ -214,7 +214,7 @@ int input_file(const char* filename, football_t* arr) {
 int output_file(const char* filename, football_t* arr, int n) {
     FILE* f = fopen(filename, "w");
     if (!f) {
-        perror("Ошибка создания файла");
+        perror("РћС€РёР±РєР° СЃРѕР·РґР°РЅРёСЏ С„Р°Р№Р»Р°");
         return -1;
     }
 

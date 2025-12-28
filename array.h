@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef ARRAY_H
 #define ARRAY_H
 #define SIZE 5

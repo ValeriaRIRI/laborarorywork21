@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_DEPRECATE
+п»ї#define _CRT_SECURE_NO_DEPRECATE
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,80 +16,80 @@ int main() {
     int choice;
     int current_day, current_month, current_year;
 
-    printf("Введите сегодняшнюю дату (день месяц год): ");
+    printf("Р’РІРµРґРёС‚Рµ СЃРµРіРѕРґРЅСЏС€РЅСЋСЋ РґР°С‚Сѓ (РґРµРЅСЊ РјРµСЃСЏС† РіРѕРґ): ");
     scanf("%d %d %d", &current_day, &current_month, &current_year);
     getchar();
 
     do {
         print_menu();
-        printf("Выберите действие (0-8): ");
+        printf("Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ (0-8): ");
         scanf("%d", &choice);
         getchar();
 
         switch (choice) {
-        case 1: // Инициализация
+        case 1: // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ
             fill_array(players, SIZE);
             count = SIZE;
-            printf("Массив инициализирован (%d записей)\n", count);
+            printf("РњР°СЃСЃРёРІ РёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°РЅ (%d Р·Р°РїРёСЃРµР№)\n", count);
             break;
 
-        case 2: // Загрузка из файла
+        case 2: // Р—Р°РіСЂСѓР·РєР° РёР· С„Р°Р№Р»Р°
             count = input_file("players_out.txt", players);
-            printf("Загружено %d записей из файла\n", count);
+            printf("Р—Р°РіСЂСѓР¶РµРЅРѕ %d Р·Р°РїРёСЃРµР№ РёР· С„Р°Р№Р»Р°\n", count);
             if (count > 0) print_array(players, count);
             break;
 
-        case 3: // Вывод массива
+        case 3: // Р’С‹РІРѕРґ РјР°СЃСЃРёРІР°
             if (count == 0) {
-                printf("Массив пуст.\n");
+                printf("РњР°СЃСЃРёРІ РїСѓСЃС‚.\n");
             }
             else {
                 print_array(players, count);
             }
             break;
 
-        case 4: // Изменение записи
+        case 4: // РР·РјРµРЅРµРЅРёРµ Р·Р°РїРёСЃРё
             if (count == 0) {
-                printf("Массив пуст.\n");
+                printf("РњР°СЃСЃРёРІ РїСѓСЃС‚.\n");
             }
             else {
                 change_record(players, count);
             }
             break;
 
-        case 5: // Поиск по фамилии
+        case 5: // РџРѕРёСЃРє РїРѕ С„Р°РјРёР»РёРё
             if (count == 0) {
-                printf("Массив пуст.\n");
+                printf("РњР°СЃСЃРёРІ РїСѓСЃС‚.\n");
             }
             else {
-                printf("Введите фамилию для поиска: ");
+                printf("Р’РІРµРґРёС‚Рµ С„Р°РјРёР»РёСЋ РґР»СЏ РїРѕРёСЃРєР°: ");
                 char surname[m];
                 fgets(surname, sizeof(surname), stdin);
                 surname[strcspn(surname, "\n")] = 0;
 
                 football_t* found = search_surname(players, count, surname);
                 if (found != NULL) {
-                    printf("Найден игрок:\n");
+                    printf("РќР°Р№РґРµРЅ РёРіСЂРѕРє:\n");
                     print_player(*found);
                 }
                 else {
-                    printf("Игрок с фамилией '%s' не найден\n", surname);
+                    printf("РРіСЂРѕРє СЃ С„Р°РјРёР»РёРµР№ '%s' РЅРµ РЅР°Р№РґРµРЅ\n", surname);
                 }
             }
             break;
 
-        case 6: // Сортировка по играм
+        case 6: // РЎРѕСЂС‚РёСЂРѕРІРєР° РїРѕ РёРіСЂР°Рј
             if (count == 0) {
-                printf("Массив пуст.\n");
+                printf("РњР°СЃСЃРёРІ РїСѓСЃС‚.\n");
             }
             else {
                 sort_by_games(players, count);
             }
             break;
 
-        case 7: // Сохранение в файл
+        case 7: // РЎРѕС…СЂР°РЅРµРЅРёРµ РІ С„Р°Р№Р»
             if (count == 0) {
-                printf("Массив пуст. Сначала: 1(инициализация) или 2(загрузка)\n");
+                printf("РњР°СЃСЃРёРІ РїСѓСЃС‚. РЎРЅР°С‡Р°Р»Р°: 1(РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ) РёР»Рё 2(Р·Р°РіСЂСѓР·РєР°)\n");
             }
             else {
                 output_file("players_out.txt", players, count);  
@@ -97,25 +97,25 @@ int main() {
             break;
 
 
-        case 8: // Поиск молодых защитников и запись в файл
+        case 8: // РџРѕРёСЃРє РјРѕР»РѕРґС‹С… Р·Р°С‰РёС‚РЅРёРєРѕРІ Рё Р·Р°РїРёСЃСЊ РІ С„Р°Р№Р»
             if (count == 0) {
-                printf("Массив пуст.\n");
+                printf("РњР°СЃСЃРёРІ РїСѓСЃС‚.\n");
             }
             else {
                 int found_count = 0;
                 writeYoungDefendersToFile(players, count, current_year, current_month, current_day, &found_count);
                 if (found_count == 0) {
-                    printf("Подходящих футболистов не найдено.\n");
+                    printf("РџРѕРґС…РѕРґСЏС‰РёС… С„СѓС‚Р±РѕР»РёСЃС‚РѕРІ РЅРµ РЅР°Р№РґРµРЅРѕ.\n");
                 }
             }
             break;
 
         case 0:
-            printf("Выход из программы.\n");
+            printf("Р’С‹С…РѕРґ РёР· РїСЂРѕРіСЂР°РјРјС‹.\n");
             break;
 
         default:
-            printf("Такой операции не существует   \n");
+            printf("РўР°РєРѕР№ РѕРїРµСЂР°С†РёРё РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚   \n");
         }
         printf("\n");
     } while (choice != 0);
